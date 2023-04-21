@@ -64,12 +64,10 @@ export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
         if (this.subscription) {
             return;
         }
-        console.log('messageSub');
         this.subscription = subscribe(
             this.messageContext,
             BOATMC,
             (message) => {
-                console.log('........', message);
                 this.boatId = message.recordId;
             },
             { scope: APPLICATION_SCOPE }
@@ -81,7 +79,6 @@ export default class BoatDetailTabs extends NavigationMixin(LightningElement) {
     connectedCallback() {
 
         this.subscribeMC()
-        console.log('connected callback ');
     }
 
     // Navigates to record page

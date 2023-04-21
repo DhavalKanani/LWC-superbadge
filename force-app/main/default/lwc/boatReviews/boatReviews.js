@@ -23,8 +23,7 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
 
     // Getter to determine if there are reviews to display
     get reviewsToShow() {
-        console.log('reviewsToShow', this.boatReviews.data !== undefined && this.boatReviews.data != null && this.boatReviews.length > 0);
-        return this.boatReviews.data !== undefined && this.boatReviews.data != null && this.boatReviews.length > 0;
+        return this.boatReviews !== undefined && this.boatReviews != null && this.boatReviews.length > 0;
     }
 
     // Public method to force a refresh of the reviews invoking getReviews
@@ -38,11 +37,19 @@ export default class BoatReviews extends NavigationMixin(LightningElement) {
     // sets isLoading to true during the process and false when it’s completed
     // Gets all the boatReviews from the result, checking for errors.
     getReviews() {
-        if (!this.boatId) return;
-        this.isLoading = true;
-        getAllReviews({ boatId: this.boatId }).then(data => { console.log(JSON.stringify(data)); }).catch(e => { this.error = e }).finally(() => {
-            this.isLoading = false;
-        });
+        if (this.boatId) {
+            this.isLoading = true;
+            getAllReviews({ boatId: this.boatId }).then((result) => {
+                this.boatReviews = result;
+                this.error = undefined;
+            }).catch((error) => {
+                this.error = error;
+            }).finally(() => {
+                this.isLoading = false;
+            });
+        } else {
+            return;
+        }
     }
 
     // Helper method to use NavigationMixin to navigate to a given record on click

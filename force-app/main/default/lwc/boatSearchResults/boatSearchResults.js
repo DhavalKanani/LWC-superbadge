@@ -35,17 +35,6 @@ export default class BoatSearchResults extends LightningElement {
     @wire(getBoats, { boatTypeId: '$boatTypeId' })
     wiredBoats(result) {
         this.boats = result;
-        //console.log(JSON.stringify(result));
-        // if (result.data) {
-        //     this.boats = result.data;
-        // }
-        // else if (result.error) {
-        //     const evt = new ShowToastEvent({
-        //         title: ERROR_TITLE,
-        //         variant: ERROR_VARIANT,
-        //     });
-        //     this.dispatchEvent(evt);
-        // }
     }
 
     // public function that updates the existing boatTypeId property
@@ -103,7 +92,6 @@ export default class BoatSearchResults extends LightningElement {
                 return this.refresh();
             })
             .catch(error => {
-                console.log(JSON.stringify(error));
                 const evt = new ShowToastEvent({
                     title: ERROR_TITLE,
                     variant: ERROR_VARIANT,

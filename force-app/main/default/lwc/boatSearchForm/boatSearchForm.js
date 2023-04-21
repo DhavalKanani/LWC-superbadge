@@ -17,7 +17,6 @@ export default class BoatSearchForm extends LightningElement {
                 return { label: type.Name, value: type.Id }
             });
             this.searchOptions.unshift({ label: 'All Types', value: '' });
-            console.log(JSON.stringify(this.searchOptions));
         } else if (error) {
             this.searchOptions = undefined;
             this.error = error;
